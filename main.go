@@ -28,9 +28,6 @@ func NewTemplateRenderer(paths ...string) *Template {
 	return tmp
 }
 
-
-
-
 func main() {
 	renderer := NewTemplateRenderer("./public/*.html")
 
@@ -61,7 +58,7 @@ func main() {
 			http.Error(w, "Invalid number 1", http.StatusBadRequest)
 			return
 		}
-	
+
 		num2Int, err2 := strconv.Atoi(num2)
 		if err2 != nil {
 			http.Error(w, "Invalid number 2", http.StatusBadRequest)
@@ -73,10 +70,10 @@ func main() {
 
 	http.HandleFunc("/form", func(w http.ResponseWriter, r *http.Request) {
 		data := struct {
-			Title string
+			Title       string
 			NumberAdded int
 		}{
-			Title: "Add Numbers",
+			Title:       "Add Numbers",
 			NumberAdded: numbersAdded,
 		}
 		renderer.Render(w, "adding-numbers.html", data)
