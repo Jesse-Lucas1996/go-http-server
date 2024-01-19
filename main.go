@@ -8,6 +8,8 @@ import (
 	"strconv"
 )
 
+var numbersAdded int
+
 type Template struct {
 	Templates *template.Template
 }
@@ -49,7 +51,7 @@ func main() {
 		}
 		renderer.Render(w, "about.html", data)
 	})
-	var numbersAdded int
+
 	http.HandleFunc("/add", func(w http.ResponseWriter, r *http.Request) {
 		num1 := r.FormValue("num1")
 		num2 := r.FormValue("num2")
