@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/public/icon/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{{.Title}}</title>
+  </head>
+  <body>
+    {{template "navbar.html" .}}
+    <main
+      class="flex flex-col items-center justify-center min-h-screen mx-auto"
+    >
+      <section>
+        <h2>Our Story</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam
+          lectus.
+        </p>
+      </section>
+      <section>
+        <h2>Our Team</h2>
+        <p>
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+          accusantium doloremque laudantium.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <p>© 2022 Our Company</p>
+    </footer>
+  </body>
+</html>
