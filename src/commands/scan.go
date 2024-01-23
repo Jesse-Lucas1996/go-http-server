@@ -1,4 +1,4 @@
-package main
+package helpers
 
 import (
 	"encoding/json"
@@ -15,7 +15,7 @@ import (
 
 var ScannedIpAddresses []string
 
-func ipscanner() {
+func IpScanner() {
 	http.HandleFunc("/scan", func(w http.ResponseWriter, r *http.Request) {
 		ipAddress := r.FormValue("ip-address")
 		port := "25565"
@@ -42,9 +42,9 @@ func ipscanner() {
 					} else {
 						ScannedIpAddresses = append(ScannedIpAddresses, newIpAddress)
 						jsonData, err := json.Marshal(ScannedIpAddresses)
-						check(err)
+						CheckError(err)
 						err = os.WriteFile("./ip-found.json", jsonData, 0644)
-						check(err)
+						CheckError(err)
 						log.Printf("%s: Port is open\n", newIpAddress)
 					}
 				}(i)

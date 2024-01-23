@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
+	helpers "go-http-server/src/commands"
 	"net/http"
 )
 
-var renderer *Template
+var renderer *helpers.Template
 
 func main() {
-	renderer = NewTemplateRenderer("./public/*.html")
+	renderer = helpers.NewTemplateRenderer("../public/*.html")
 
 	http.Handle("/html/", http.StripPrefix("/html/", http.FileServer(http.Dir("./public"))))
 	http.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
@@ -35,16 +36,14 @@ func main() {
 			ScannedIpAddresses []string
 		}{
 			Title:              "IP Scanner",
-			ScannedIpAddresses: ScannedIpAddresses,
+			ScannedIpAddresses: helpers.ScannedIpAddresses,
 		}
 
 		renderer.Render(w, "ip-scanner.html", data)
 	})
-	ipscanner()
+	helpers.IpScanner()
 
 	fmt.Printf("Starting server at http://localhost:3333\n")
 	err := http.ListenAndServe(":3333", nil)
-	if err != nil {
-		panic(err)
-	}
+	helpers.CheckError(err)
 }
