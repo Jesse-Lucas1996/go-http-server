@@ -10,7 +10,7 @@ import (
 var renderer *helpers.Template
 
 func main() {
-	renderer = helpers.NewTemplateRenderer("../public/*.html")
+	renderer = helpers.NewTemplateRenderer("./public/*.html")
 
 	http.Handle("/html/", http.StripPrefix("/html/", http.FileServer(http.Dir("./public"))))
 	http.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
@@ -44,11 +44,11 @@ func main() {
 	})
 	helpers.IpScanner()
 
-	fmt.Printf("Starting server at http://localhost:3333\n")
+	fmt.Printf("Starting server at http://localhost:8080\n")
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
-	err := http.ListenAndServe(port, nil)
+	err := http.ListenAndServe(":"+port, nil)
 	helpers.CheckError(err)
 }
