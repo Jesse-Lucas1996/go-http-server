@@ -4,6 +4,7 @@ import (
 	"fmt"
 	helpers "go-http-server/src/commands"
 	"net/http"
+	"os"
 )
 
 var renderer *helpers.Template
@@ -44,6 +45,10 @@ func main() {
 	helpers.IpScanner()
 
 	fmt.Printf("Starting server at http://localhost:3333\n")
-	err := http.ListenAndServe(":3333", nil)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	err := http.ListenAndServe(port, nil)
 	helpers.CheckError(err)
 }
